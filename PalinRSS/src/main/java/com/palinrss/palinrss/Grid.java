@@ -33,8 +33,10 @@ public class Grid extends ActionBarActivity {
     private class StreamTask extends AsyncTask<String, Void, InputStream>
     {
 
+
         @Override
         protected InputStream doInBackground(String... url) {
+
             try
             {
                 URL StreamURL = new URL(url[0]);
@@ -108,6 +110,7 @@ public class Grid extends ActionBarActivity {
             }
         }
     }
+
 
 
 

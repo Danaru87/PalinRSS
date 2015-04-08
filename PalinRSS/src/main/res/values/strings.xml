@@ -7,5 +7,6 @@
     <string name="butRead">Read</string>
     <string name="title_activity_grid">Grid</string>
     <string name="url">http://feeds.feedburner.com/android-france?format=xml</string>
+    <string name="title_activity_main_activity2">MainActivity2Activity</string>
 
 </resources>
