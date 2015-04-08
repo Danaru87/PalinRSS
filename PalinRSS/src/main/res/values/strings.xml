@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">PalinRSS</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="butRead">Read</string>
+    <string name="title_activity_grid">Grid</string>
+    <string name="url">http://feeds.feedburner.com/android-france?format=xml</string>
+
+</resources>
