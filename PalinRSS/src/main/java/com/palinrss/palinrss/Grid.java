@@ -123,7 +123,7 @@ public class Grid extends ActionBarActivity {
             }
             else
             {
-                //Toast.makeText(getApplicationContext(), "URL Invalide, aucun flux trouvé", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "URL Invalide, aucun flux trouvé", Toast.LENGTH_LONG).show();
             }
             dialog.dismiss();
         }
