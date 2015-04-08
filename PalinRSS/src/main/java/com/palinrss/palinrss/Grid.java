@@ -1,5 +1,6 @@
 package com.palinrss.palinrss;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -19,13 +21,22 @@ import java.util.List;
 
 
 public class Grid extends ActionBarActivity {
+    ProgressDialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_grid);
         Log.v("RSS", "Ouverture de la grille");
         Intent myintent = getIntent();
 
+        //Toast.makeText(getApplicationContext(), "Chargement du flux depuis l'url...", Toast.LENGTH_SHORT).show();
+        dialog = new ProgressDialog(Grid.this);
+        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        dialog.setMessage("Loading. Please wait...");
+        dialog.setIndeterminate(true);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
         new StreamTask().execute(myintent.getStringExtra("URL"));
     }
 
@@ -33,6 +44,11 @@ public class Grid extends ActionBarActivity {
     private class StreamTask extends AsyncTask<String, Void, InputStream>
     {
 
+        @Override
+        protected void onPreExecute()
+        {
+            setProgressBarIndeterminateVisibility(true);
+        }
 
         @Override
         protected InputStream doInBackground(String... url) {
@@ -81,6 +97,7 @@ public class Grid extends ActionBarActivity {
         @Override
         protected void onPostExecute(List<XmlParser.Entry> entriesList)
         {
+            setProgressBarIndeterminateVisibility(false);
             ArrayList<ItemRSS> itemRSSList = new ArrayList<ItemRSS>();
             if (entriesList != null)
             {
@@ -106,9 +123,11 @@ public class Grid extends ActionBarActivity {
             }
             else
             {
-                Toast.makeText(getApplicationContext(), "URL Invalide, aucun flux trouvé", Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), "URL Invalide, aucun flux trouvé", Toast.LENGTH_LONG).show();
             }
+            dialog.dismiss();
         }
+
     }
 
 
